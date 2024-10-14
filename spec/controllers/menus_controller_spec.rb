@@ -35,7 +35,7 @@ RSpec.describe MenusController, type: :controller do
   describe 'POST #create' do
     it 'creates a new menu and returns a successful response' do
       expect {
-        post :create, params: { menu: { name: "New Menu" } }
+        post :create, params: { name: "New Menu" }
       }.to change(Menu, :count).by(1)
 
       expect(response).to have_http_status(:ok)
@@ -43,7 +43,7 @@ RSpec.describe MenusController, type: :controller do
     end
 
     it 'returns an unprocessable_entity response when name is blank' do
-      post :create, params: { menu: { name: "" } }
+      post :create, params: { name: "" }
       expect(response).to have_http_status(:unprocessable_entity)
       expect(JSON.parse(response.body)["message"]).to include("Error when trying to save the Menu: Validation failed: Name can't be blank")
     end
@@ -51,7 +51,7 @@ RSpec.describe MenusController, type: :controller do
 
   describe 'PUT #update' do
     it 'updates an existing menu and returns a successful response' do
-      put :update, params: { id: menu.id, menu: { name: "Updated Menu" } }
+      put :update, params: { id: menu.id, name: "Updated Menu" }
       menu.reload
 
       expect(response).to have_http_status(:ok)
@@ -60,14 +60,14 @@ RSpec.describe MenusController, type: :controller do
     end
 
     it 'returns a not_found response when the menu does not exist' do
-      put :update, params: { id: 999, menu: { name: "Attempted Update" } }
+      put :update, params: { id: 999, name: "Attempted Update" }
       expect(response).to have_http_status(:not_found)
       expect(JSON.parse(response.body)["message"]).to eq("Menu not found")
     end
 
     it 'returns an internal_server_error response for unexpected errors' do
       allow_any_instance_of(Menu).to receive(:update!).and_raise(StandardError)
-      put :update, params: { id: menu.id, menu: { name: "Attempted Update" } }
+      put :update, params: { id: menu.id, name: "Attempted Update" }
       expect(response).to have_http_status(:internal_server_error)
       expect(JSON.parse(response.body)["message"]).to include("An unexpected error occurred")
     end
