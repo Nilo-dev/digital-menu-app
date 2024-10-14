@@ -1,6 +1,7 @@
-class MenuService
-  def self.fetch_menus
-    menus = Menu.all
+class MenuService < BaseService
+  def self.fetch_menus(restaurant_id)
+    menus = Menu.where(restaurant_id: restaurant_id)
+
     if data_present?(menus)
       { message: "Successful request", data: menus, status: :ok }
     else
@@ -8,8 +9,8 @@ class MenuService
     end
   end
 
-  def self.fetch_menu(id)
-    menu = Menu.find_by(id: id)
+  def self.fetch_menu(id:, restaurant_id:)
+    menu = Menu.find_by(id: id, restaurant_id: restaurant_id)
     if data_present?(menu)
       { message: "Successful request", data: menu, status: :ok }
     else
@@ -17,8 +18,8 @@ class MenuService
     end
   end
 
-  def self.create_menu(name)
-    menu = Menu.new(name: name)
+  def self.create_menu(name:, restaurant_id:)
+    menu = Menu.new(name: name, restaurant_id: restaurant_id)
     begin
       menu.save!
       { message: "Menu #{menu.name} successfully created.", status: :ok }
@@ -29,9 +30,8 @@ class MenuService
     end
   end
 
-  def self.update_menu(id:, name:)
-    menu = Menu.find_by(id: id)
-
+  def self.update_menu(id:, name:, restaurant_id:)
+    menu = Menu.find_by(id: id, restaurant_id: restaurant_id)
     return { message: "Menu not found", status: :not_found } unless data_present?(menu)
 
     begin
@@ -42,15 +42,5 @@ class MenuService
     rescue StandardError => e
       { message: format_error_message("An unexpected error occurred", e), status: :internal_server_error }
     end
-  end
-
-  private
-
-  def self.data_present?(data)
-    data.present?
-  end
-
-  def self.format_error_message(base_message, error)
-    "#{base_message}: #{error.message}"
   end
 end
