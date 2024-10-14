@@ -40,8 +40,6 @@ class MenuItemService
     begin
       menu_item.update!(update_params)
       { message: "Menu item #{menu_item.name} successfully updated.", status: :ok }
-    rescue ActiveRecord::RecordInvalid => e
-      { message: format_error_message("Error when trying to update the Menu Item", e), status: :unprocessable_entity }
     rescue StandardError => e
       { message: format_error_message("An unexpected error occurred", e), status: :internal_server_error }
     end
