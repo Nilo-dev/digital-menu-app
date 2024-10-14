@@ -30,7 +30,7 @@ class MenusController < ApplicationController
 
   def set_menu_id
     @menu_id = params[:id]
-    render json: { message: "Menu not found", status: :not_found }, status: :not_found unless Menu.exists?(@menu_id)
+    render json: { message: "Menu not found", status: :not_found }, status: :not_found unless Menu.exists?(id: @menu_id)
   end
 
   def set_menu_params
