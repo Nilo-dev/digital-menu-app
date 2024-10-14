@@ -61,7 +61,7 @@ docker compose run web rspec
 - `app/controllers`: Contains the controllers for handling requests to the API.
 - `app/services`: Contains the logic to abstract and simplify usage on application.
 - `spec`: Contains unit tests written in RSpec.
-- 
+
 ### Development Notes
 
 - The project is containerized with Docker for easy setup and deployment.
