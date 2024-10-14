@@ -2,7 +2,7 @@
 
 ![Static Badge](https://img.shields.io/badge/Ruby-3.3.1-282828?style=flat&logo=ruby&logoColor=282828&labelColor=CC342D) ![Static Badge](https://img.shields.io/badge/RSpec-3.13-282828?style=flat&logo=rubygems&logoColor=282828&labelColor=f53e5c) ![Static Badge](https://img.shields.io/badge/Docker-27.3.1-282828?style=flat&logo=docker&logoColor=282828&labelColor=2496ED)
 
-This is a Ruby on Rails application that provides functionality for managing restaurants, menus, and menu items. It allows restaurants to have multiple menus, and menu items can be associated with different menus within the same restaurant. Menu items are designed to avoid duplication within a restaurant's context.
+This is a Ruby on Rails application that provides functionality for managing restaurants, menus, and menu items. It allows restaurants to have multiple menus, and menu items can be associated with different menus within the same restaurant. Menu items are designed to avoid duplication.
 
 ## Features
 
