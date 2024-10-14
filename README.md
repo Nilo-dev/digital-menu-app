@@ -43,7 +43,11 @@ docker compose up
 
 The application will be accessible at http://localhost:3000
 
-### 3. Running Tests
+### 3. Utilizing the application
+
+You can find the API endpoints on Postman [here](https://www.postman.com/mission-astronomer-42266948/digital-menu-app/overview).
+
+### 4. Running Tests
 
 To run the test suite inside the Docker container, use the following command:
 
