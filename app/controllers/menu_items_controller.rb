@@ -1,7 +1,7 @@
 class MenuItemsController < ApplicationController
   before_action :set_menu_item_params, only: [ :create, :update ]
   before_action :set_menu_item_id, only: [ :show, :update ]
-  before_action :set_menu_id, only: [ :index, :create ]
+  before_action :set_menu_id, only: [ :index, :show, :create, :update ]
 
   def index
     response = MenuItemService.fetch_menu_items(@menu_id)
@@ -9,7 +9,7 @@ class MenuItemsController < ApplicationController
   end
 
   def show
-    response = MenuItemService.fetch_menu_item(@menu_item_id)
+    response = MenuItemService.fetch_menu_item(id: @menu_item_id, menu_id: @menu_id)
     render json: response, status: response[:status]
   end
 
@@ -27,6 +27,7 @@ class MenuItemsController < ApplicationController
   def update
     response = MenuItemService.update_menu_item(
       id: @menu_item_id,
+      menu_id: @menu_id,
       name: @menu_item[:name],
       description: @menu_item[:description],
       price: @menu_item[:price]
