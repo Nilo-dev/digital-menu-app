@@ -1,7 +1,7 @@
 class MenuItemsController < ApplicationController
-  before_action :set_menu_item_params, only: [ :create, :update ]
-  before_action :set_menu_item_id, only: [ :show, :update ]
-  before_action :set_menu_id, only: [ :index, :show, :create, :update ]
+  before_action :set_menu_item_params, only: [:create, :update]
+  before_action :set_menu_item_id, only: [:show, :update]
+  before_action :set_menu_id, only: [:index, :show, :create, :update]
 
   def index
     response = MenuItemService.fetch_menu_items(@menu_id)
@@ -40,12 +40,16 @@ class MenuItemsController < ApplicationController
 
   def set_menu_id
     @menu_id = params[:menu_id]
-    render json: { message: "Menu not found", status: :not_found }, status: :not_found unless Menu.exists?(id: @menu_id)
+    unless Menu.exists?(id: @menu_id)
+      render json: { message: "Menu not found" }, status: :not_found and return
+    end
   end
 
   def set_menu_item_id
     @menu_item_id = params[:id]
-    render json: { message: "Menu Item not found", status: :not_found }, status: :not_found unless MenuItem.exists?(id: @menu_item_id)
+    unless MenuItem.exists?(id: @menu_item_id)
+      render json: { message: "Menu Item not found" }, status: :not_found and return
+    end
   end
 
   def set_menu_item_params
