@@ -1,4 +1,4 @@
-class MenuItemService
+class MenuItemService < BaseService
   def self.fetch_menu_items(menu_id)
     menu_item_menus = MenuItemMenu.where(menu_id: menu_id).includes(:menu_item)
 
@@ -106,13 +106,5 @@ class MenuItemService
     @description = description
     @price = price
     @menu_id = menu_id
-  end
-
-  def self.data_present?(data)
-    data.present?
-  end
-
-  def self.format_error_message(base_message, error)
-    "#{base_message}: #{error.message}"
   end
 end

@@ -1,4 +1,4 @@
-class MenuService
+class MenuService < BaseService
   def self.fetch_menus
     menus = Menu.all
     if data_present?(menus)
@@ -42,15 +42,5 @@ class MenuService
     rescue StandardError => e
       { message: format_error_message("An unexpected error occurred", e), status: :internal_server_error }
     end
-  end
-
-  private
-
-  def self.data_present?(data)
-    data.present?
-  end
-
-  def self.format_error_message(base_message, error)
-    "#{base_message}: #{error.message}"
   end
 end
