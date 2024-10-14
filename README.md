@@ -8,7 +8,6 @@ This is a Ruby on Rails application that provides functionality for managing res
 
 - Restaurants can have multiple menus (e.g., lunch, dinner).
 - Menu items can be shared between different menus of the same restaurant without duplication.
-- JSON import functionality to bulk upload restaurant, menu, and menu items data.
 - RESTful API for managing restaurants, menus, and menu items.
 - SQLite3 is used as the database for local development.
   
@@ -44,15 +43,7 @@ docker compose up
 
 The application will be accessible at http://localhost:3000
 
-### 3. Seed the Database (Optional)
-
-You can add sample data to the database by running:
-
-````sh
-docker compose run web rails db:seed
-````
-
-### 4. Running Tests
+### 3. Running Tests
 
 To run the test suite inside the Docker container, use the following command:
 
@@ -60,24 +51,15 @@ To run the test suite inside the Docker container, use the following command:
 docker compose run web rspec
 ````
 
-### JSON Import Functionality
-
-The application supports importing restaurants, menus, and menu items from a JSON file. You can POST a JSON file to the `/restaurants/import` endpoint to bulk upload data. You can find an example file at `/storage/restaurant_data.json`.
-
-To import a JSON file:
-````sh
-curl -X POST -F "file=@path/to/restaurant_data.json" http://localhost:3000/restaurants/import
-````
-
 ### Project Structure
 
 - `app/models`: Contains the application’s models (Restaurant, Menu, MenuItem).
 - `app/controllers`: Contains the controllers for handling requests to the API.
-- `app/services`: Contains services like the JSON import service to process bulk uploads.
-- `spec`: Contains unit and request tests written in RSpec.
+- `app/services`: Contains the logic to abstract and simplify usage on application.
+- `spec`: Contains unit tests written in RSpec.
 - 
 ### Development Notes
 
 - The project is containerized with Docker for easy setup and deployment.
 - The application uses SQLite3 for the local development database.
-- A focus was placed on ensuring that menu items are not duplicated within the same restaurant, even when associated with multiple menus.
+- A focus was placed on ensuring that menu items are not duplicated, even when associated with multiple menus.
