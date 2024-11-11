@@ -58,7 +58,7 @@ end
 
 gem "rspec", "~> 3.13"
 
-gem "rspec-rails", "~> 7.0"
+gem "rspec-rails", "~> 7.1"
 
 gem "simplecov", "~> 0.22.0"
 
